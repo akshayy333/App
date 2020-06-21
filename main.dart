@@ -1,14 +1,17 @@
+
+import 'dart:io';
 import 'package:flutter/material.dart';
 
 void main() {
 var home=Home();
-var users=Userspage(); 
+var exitbutton=Exit();
+var back=Back();
 runApp(MaterialApp(
   initialRoute:'/',
   routes:{
     '/':(context)=>home,
-    '/users':(context)=>users,
-    
+    '/exitbutton':(context)=>exitbutton,
+    '/back':(context)=>back,
   },
 ));
 }
@@ -19,79 +22,66 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.blueGrey[200],
   appBar: AppBar(
-  title: Text('Auction',style:TextStyle(color:Colors.white,fontWeight: FontWeight.bold)),
+  title: Text('Maximl',style:TextStyle(color:Colors.white,fontWeight: FontWeight.bold)),
   centerTitle: true,
-  backgroundColor: Colors.pinkAccent,
+  backgroundColor: Colors.orangeAccent,
   ),
-  body:
-SizedBox(width: 1000,height: 100,
-    child:RaisedButton(
-      child: Text('Products',style: TextStyle(fontWeight:FontWeight.bold),),
+  body: Center(
+    child: RaisedButton(
+      color: Colors.orangeAccent,
+      child: Text('EXIT',style: TextStyle(backgroundColor: Colors.orangeAccent)),
       onPressed: (){
-        Navigator.pushNamed(context, '/users');
+        Navigator.pushNamed(context,'/exitbutton');
       },
-      ),
+       ),
   ),
-    );
+   );
   }
 }
-class Userspage extends StatelessWidget {
+class Exit extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Are you sure?'),
+            content: Text('Do you want to exit an App'),
+            actions: <Widget>[
+              FlatButton(
+                color: Colors.orangeAccent,
+                onPressed: () => Navigator.pushNamed(context, '/back'),
+                child: Text('No'),
+              ),
+              FlatButton(
+                color: Colors.orangeAccent,
+                onPressed: () => exit(0),
+                                child: Text('Yes'),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+  }
+}
+class Back extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey[200],
   appBar: AppBar(
-  title: Text('Products list',style:TextStyle(color:Colors.white,fontWeight: FontWeight.bold)),
+  title: Text('Maximl',style:TextStyle(color:Colors.white,fontWeight: FontWeight.bold)),
   centerTitle: true,
-  backgroundColor: Colors.pinkAccent,
+  backgroundColor: Colors.orangeAccent,
   ),
-      body: Padding(padding: EdgeInsets.fromLTRB(40,30,50,60),
-      child:Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text('1.Jacket',style:TextStyle(fontWeight:FontWeight.bold,
-          color:Colors.black,
-          fontSize:22),
-          ),
-          Text('2.Furnitures',style:TextStyle(fontWeight:FontWeight.bold,
-          color:Colors.black,
-          fontSize:22),
-          ),
-          Text('3.Computer',style:TextStyle(fontWeight:FontWeight.bold,
-          color:Colors.black,
-          fontSize:22),
-          ),
-          Text('4.Sports equipment',style:TextStyle(fontWeight:FontWeight.bold,
-          color:Colors.black,
-          fontSize:22),
-          ),
-          Text('5.Cameras',style:TextStyle(fontWeight:FontWeight.bold,
-          color:Colors.black,
-          fontSize:22),
-          ),
-          Text('6.MobilePhones',style:TextStyle(fontWeight:FontWeight.bold,
-          color:Colors.black,
-          fontSize:22),
-          ),
-          Text('7.Drinks',style:TextStyle(fontWeight:FontWeight.bold,
-          color:Colors.black,
-          fontSize:22),
-          ),
-          Text('8.Electronics',style:TextStyle(fontWeight:FontWeight.bold,
-          color:Colors.black,
-          fontSize:22),
-          ),
-          Text('9.Houses',style:TextStyle(fontWeight:FontWeight.bold,
-          color:Colors.black,
-          fontSize:22),
-          ),
-          Text('10.Food items',style:TextStyle(fontWeight:FontWeight.bold,
-          color:Colors.black,
-          fontSize:22),
-          ),
-        ],
-        )
-        ),
-    );
+  body: Center(
+    child: RaisedButton(
+      color: Colors.orangeAccent,
+      child: Text('EXIT',style: TextStyle(backgroundColor: Colors.orangeAccent)),
+      onPressed: (){
+        Navigator.pushNamed(context,'/exitbutton');
+      },
+       ),
+  ),
+   );
   }
 }
